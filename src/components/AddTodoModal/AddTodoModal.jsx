@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../ui/Button/Button";
 
 const AddTodoModal = () => {
   const [Priority, setPriority] = useState("Select priority");
   const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    setTasks(storedTasks);
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,6 +22,7 @@ const AddTodoModal = () => {
       task_name,
       description,
       Priority,
+      isComplete: false,
     };
 
     console.log(id, task_name, description, Priority);
@@ -25,7 +31,7 @@ const AddTodoModal = () => {
 
     localStorage.setItem("tasks", JSON.stringify(updateTasks));
 
-    setTasks(updateTasks)
+    setTasks(updateTasks);
   };
 
   return (
@@ -58,6 +64,7 @@ const AddTodoModal = () => {
               <input
                 type="text"
                 name="task_name"
+                placeholder="Add task"
                 id="task"
                 className="ml-[70px] w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-black"
               />
@@ -72,11 +79,11 @@ const AddTodoModal = () => {
               <input
                 type="text"
                 name="description"
+                placeholder="Write description"
                 id="description"
                 className="ml-6 w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-black"
               />
             </div>
-
             <div className="mb-12">
               <label htmlFor="">Priority</label>
               {/*  */}
@@ -117,6 +124,8 @@ const AddTodoModal = () => {
           </div>
         </div>
       </form>
+
+  
     </>
   );
 };
