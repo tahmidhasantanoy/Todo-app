@@ -3,6 +3,7 @@ import Button from "../ui/Button/Button";
 
 const AddTodoModal = () => {
   const [Priority, setPriority] = useState("Select priority");
+  const [tasks, setTasks] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,6 +20,12 @@ const AddTodoModal = () => {
     };
 
     console.log(id, task_name, description, Priority);
+
+    const updateTasks = [...tasks, addTaskInfo];
+
+    localStorage.setItem("tasks", JSON.stringify(updateTasks));
+
+    setTasks(updateTasks)
   };
 
   return (
