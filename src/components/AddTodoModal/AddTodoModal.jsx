@@ -46,7 +46,7 @@ const AddTodoModal = () => {
         </label>
       </Button>
 
-      {/* Put this part before </body> tag */}
+
       <form action="" onSubmit={handleSubmit}>
         <input type="checkbox" id="my_modal_6" className="modal-toggle" />
         <div className="modal" role="dialog">
@@ -124,8 +124,6 @@ const AddTodoModal = () => {
           </div>
         </div>
       </form>
-
-  
     </>
   );
 };

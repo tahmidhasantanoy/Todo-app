@@ -1,9 +1,9 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import AddTodoModal from "../AddTodoModal/AddTodoModal";
 import TodoFilter from "../TodoFilter";
 import "./TodoContainer.css";
 import TodoCard from "../TodoCard";
-import { key } from "localforage";
 
 const TodoContainer = () => {
   const [tasks, setTasks] = useState([]);
@@ -11,10 +11,9 @@ const TodoContainer = () => {
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     setTasks(storedTasks);
-  }, []);
+  }, []); // i think the problem is here , not re-rendering 
 
   const handleDelete = (deleteId) => {
-    console.log(deleteId);
 
     const remainTasks = tasks?.filter((task) => task?.id != deleteId);
     console.log(remainTasks);
@@ -23,12 +22,26 @@ const TodoContainer = () => {
     localStorage.setItem("tasks", JSON.stringify(remainTasks));
   };
 
-  const handleEdit = (editId) => {
-    console.log(editId);
+  const handleEdit = (tasks) => {
+    setTasks(tasks)
   };
 
   const handleComplete = (completeId) => {
     console.log(completeId);
+
+    const completeTask = tasks?.filter((task) => task?.id == completeId);
+    console.log(completeTask);
+
+    const { id, task_name, description, Priority, isComplete } = completeTask;
+    const updateComplete = {
+      id,
+      task_name,
+      description,
+      Priority,
+      isComplete: true,
+    };
+
+    localStorage.setItem("tasks",JSON.stringify(updateComplete))
   };
 
   return (
@@ -47,7 +60,7 @@ const TodoContainer = () => {
                 key={task?.id}
                 task={task}
                 handleDelete={handleDelete}
-                handleEdit={handleEdit}
+                handleTaskEdit={handleEdit}
                 handleComplete={handleComplete}
               ></TodoCard>
             ))}
