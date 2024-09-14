@@ -3,14 +3,22 @@ import { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
 
-const TodoCard = ({ task, handleDelete, handleTaskEdit, handleComplete }) => {
-  const [task_description, setTask_description] = useState("");
+const TodoCard = ({
+  task,
+  handleDelete,
+  handleTaskEdit,
+  handleComplete,
+  complete,
+}) => {
   const [taskName, setTaskName] = useState("");
+  const [task_description, setTask_description] = useState("");
   const [taskPriority, setTaskPriority] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false); // Track modal state
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem("tasks")) || []
   );
+
+  console.log(complete);
 
   const { id, task_name, description, Priority, isComplete } = task;
 
@@ -19,8 +27,8 @@ const TodoCard = ({ task, handleDelete, handleTaskEdit, handleComplete }) => {
     const updatetask = tasksFromStorage?.find((task) => task?.id === editId);
 
     if (updatetask) {
-      setTask_description(updatetask?.description);
       setTaskName(updatetask?.task_name);
+      setTask_description(updatetask?.description);
     }
 
     setTimeout(() => {
@@ -33,10 +41,9 @@ const TodoCard = ({ task, handleDelete, handleTaskEdit, handleComplete }) => {
 
     // Update the task by ID in tasks state
     const updatedTasks = tasks?.map((task) => {
-      // want to send this data by DOM event
       if (task.id === taskId) {
         return {
-          ...task,
+          ...task, //merging here
           task_name: taskName,
           description: task_description,
           Priority: taskPriority,
@@ -94,6 +101,7 @@ const TodoCard = ({ task, handleDelete, handleTaskEdit, handleComplete }) => {
                 />
               </div>
 
+              {/* Update task */}
               <div className="mb-4 flex items-center">
                 <label
                   htmlFor="description"
@@ -162,12 +170,19 @@ const TodoCard = ({ task, handleDelete, handleTaskEdit, handleComplete }) => {
           type="checkbox"
           name="complete"
           id="complete"
+          checked={complete}
         />
         <p className="ml-4 text-start flex-1 text-black">{task_name}</p>
         <p className="ml-4 text-start flex-1 text-black">{description}</p>
-        <div className="flex flex-1 items-center space-x-2">
-          <p className="rounded-full size-2"></p>
-          <p>{Priority}</p>
+        <div className="flex flex-1 justify-start items-center space-x-2">
+          <p
+            className={`rounded-full size-2 
+          ${Priority === "High" ? "bg-red-500" : ""}
+          ${Priority === "Medium" ? "bg-yellow-500" : ""}
+          ${Priority === "Low" ? "bg-green-500" : ""}
+`}
+          ></p>
+          <p className="">{Priority}</p>
         </div>
         <p className="mr-12">
           {isComplete ? (
