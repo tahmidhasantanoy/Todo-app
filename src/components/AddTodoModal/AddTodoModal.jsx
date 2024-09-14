@@ -188,11 +188,11 @@ const AddTodoModal = () => {
         ) : (
           <ul>
             <div className="bg-white rounded-lg py-1 flex justify-around items-center font-semibold my-3">
-              <p className="ml-12 text-start flex-1 text-black">Task name</p>
-              <p className="ml-8 text-center flex-grow text-black">Description of todo</p>
-              <p className="text-center flex-grow text-black">Todo priority</p>
-              <p className="ml-12 flex-grow text-black">Status</p>
-              <p className="mr-12">Action</p>
+              <p className="font-bold ml-12 text-start flex-1 text-black">Task name</p>
+              <p className="font-bold ml-8 text-center flex-grow text-black">Description of todo</p>
+              <p className="font-bold text-center flex-grow text-black">Todo priority</p>
+              <p className="font-bold ml-12 flex-grow text-black">Status</p>
+              <p className="font-bold mr-12">Action</p>
             </div>
             {filteredTasks?.slice(0, VisibleItem).map((task) => (
               <TodoCard
