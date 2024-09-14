@@ -20,12 +20,12 @@ const AddTodoModal = () => {
 
   // Log whenever tasks are updated (for debugging purposes)
   useEffect(() => {
-    console.log("Tasks updated:", tasks);
+    // console.log("Tasks updated:", tasks);
   }, [tasks]);
 
   /* Todo container logic add new */
   const handleComplete = (completeId) => {
-    console.log(completeId);
+    // console.log(completeId);
 
     const completeTask = tasks?.map((task) => {
       if (task?.id == completeId) {
@@ -40,7 +40,7 @@ const AddTodoModal = () => {
       return task;
     });
 
-    console.log(completeTask);
+    // console.log(completeTask);
 
     localStorage.setItem("tasks", JSON.stringify(completeTask));
 
@@ -53,7 +53,7 @@ const AddTodoModal = () => {
 
   const handleDelete = (deleteId) => {
     const remainTasks = tasks?.filter((task) => task?.id != deleteId);
-    console.log(remainTasks);
+    // console.log(remainTasks);
     setTasks(remainTasks);
 
     localStorage.setItem("tasks", JSON.stringify(remainTasks));
@@ -162,7 +162,7 @@ const AddTodoModal = () => {
           />
           {filterItem && (
             <p className="text-center font-bold">
-              Search for : <span className="text-error">{filterItem}</span>
+              Search for : <span className="text-blue-700">{filterItem}</span>
             </p>
           )}
           <button className="absolute btn-outline left-0 top-[8px] px-4 flex items-cente text-white rounded-l-lg hover:bg-white hover:bg-opacity-10 hover:shadow-none focus:outline-none transition-all duration-300">

@@ -18,7 +18,7 @@ const TodoCard = ({
     JSON.parse(localStorage.getItem("tasks")) || []
   );
 
-  console.log(complete);
+  // console.log(complete);
 
   const { id, task_name, description, Priority, isComplete } = task;
 
