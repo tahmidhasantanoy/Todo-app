@@ -3,7 +3,7 @@
 This is a simple, responsive task management app built using React. The app allows users to add, edit, delete, and search tasks. Tasks are saved in the browser's local storage, ensuring that they persist even after refreshing or closing the browser.
 
 ## Live Demo
-Check out the live version of the app [here](https://66e5c55f1d296ba07d845072--melodious-madeleine-a8d16c.netlify.app/).
+Check out the live version of the app [here](https://66f150e5f20b6de7328098ba--papaya-figolla-dee672.netlify.app/).
 
 
 ## Features
